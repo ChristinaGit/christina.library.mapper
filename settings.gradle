@@ -1,0 +1,4 @@
+include ':christina.library.mapper'
+include ':christina.library.common'
+
+project(':christina.library.common').projectDir = new File('christina.library.common')
