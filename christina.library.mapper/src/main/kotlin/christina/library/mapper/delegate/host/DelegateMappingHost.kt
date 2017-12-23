@@ -2,7 +2,7 @@ package christina.library.mapper.delegate.host
 
 import christina.common.exception.reasonableException
 import christina.library.mapper.core.descriptor.MappingDescriptor
-import christina.library.mapper.core.exception.MapperErrorReasons.MAPPING_ALREADY_EXISTS
+import christina.library.mapper.core.exception.MapperErrorReason.MAPPING_ALREADY_EXISTS
 import christina.library.mapper.core.exception.MapperException
 import christina.library.mapper.core.host.MappingHost
 import christina.library.mapper.core.mapping.Mapping

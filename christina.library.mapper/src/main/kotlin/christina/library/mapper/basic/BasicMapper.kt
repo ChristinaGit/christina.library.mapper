@@ -4,8 +4,8 @@ import christina.common.exception.reasonableException
 import christina.common.ignore
 import christina.library.mapper.core.Mapper
 import christina.library.mapper.core.descriptor.MappingDescriptor
-import christina.library.mapper.core.exception.MapperErrorReasons.MAPPING_COLLECTION_DIFFERENT_SIZE
-import christina.library.mapper.core.exception.MapperErrorReasons.MAPPING_NOT_FOUND
+import christina.library.mapper.core.exception.MapperErrorReason.MAPPING_COLLECTION_DIFFERENT_SIZE
+import christina.library.mapper.core.exception.MapperErrorReason.MAPPING_NOT_FOUND
 import christina.library.mapper.core.exception.MapperException
 import christina.library.mapper.core.host.MappingHost
 import christina.library.mapper.core.mapping.Mapping

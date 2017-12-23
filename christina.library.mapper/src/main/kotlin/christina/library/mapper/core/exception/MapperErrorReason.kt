@@ -1,6 +1,6 @@
 package christina.library.mapper.core.exception
 
-enum class MapperErrorReasons {
+enum class MapperErrorReason {
     MAPPING_NOT_FOUND,
     MAPPING_ALREADY_EXISTS,
     MAPPING_WITHOUT_RECEIVER_NOT_SUPPORTED,

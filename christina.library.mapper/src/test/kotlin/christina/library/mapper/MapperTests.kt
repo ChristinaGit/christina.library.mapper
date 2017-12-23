@@ -5,7 +5,7 @@ import christina.common.exception.ReasonableException
 import christina.common.exception.hasReason
 import christina.library.mapper.core.Mapper
 import christina.library.mapper.core.descriptor.MappingDescriptor
-import christina.library.mapper.core.exception.MapperErrorReasons
+import christina.library.mapper.core.exception.MapperErrorReason
 import christina.library.mapper.core.exception.MapperException
 import christina.library.mapper.core.host.MappingHost
 import christina.library.mapper.core.mapping.Mapping
@@ -193,7 +193,7 @@ abstract class MapperTests(
         //endregion
 
         //region Assert
-        assertTrue(exception !== null && exception.hasReason(MapperErrorReasons.MAPPING_NOT_FOUND))
+        assertTrue(exception !== null && exception.hasReason(MapperErrorReason.MAPPING_NOT_FOUND))
         //endregion
     }
 

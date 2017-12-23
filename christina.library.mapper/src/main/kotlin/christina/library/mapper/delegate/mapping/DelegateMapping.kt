@@ -1,8 +1,8 @@
 package christina.library.mapper.delegate.mapping
 
 import christina.common.exception.reasonableException
-import christina.library.mapper.core.exception.MapperErrorReasons.MAPPING_WITHOUT_RECEIVER_NOT_SUPPORTED
-import christina.library.mapper.core.exception.MapperErrorReasons.MAPPING_WITH_RECEIVER_NOT_SUPPORTED
+import christina.library.mapper.core.exception.MapperErrorReason.MAPPING_WITHOUT_RECEIVER_NOT_SUPPORTED
+import christina.library.mapper.core.exception.MapperErrorReason.MAPPING_WITH_RECEIVER_NOT_SUPPORTED
 import christina.library.mapper.core.exception.MapperException
 import christina.library.mapper.core.mapping.Mapping
 

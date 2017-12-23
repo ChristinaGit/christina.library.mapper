@@ -28,22 +28,22 @@ dependencies {
     testImplementation 'io.mockk:mockk:1.5.5'
 }
 
-afterEvaluate {
-    compileDebugUnitTestKotlin {
-        finalizedBy copyKotlinDebugUnitTestClasses
-    }
+//afterEvaluate {
+//    compileDebugUnitTestKotlin {
+//        finalizedBy copyKotlinDebugUnitTestClasses
+//    }
+//
+//    compileDebugKotlin {
+//        finalizedBy copyKotlinDebugClasses
+//    }
+//}
 
-    compileDebugKotlin {
-        finalizedBy copyKotlinDebugClasses
-    }
-}
-
-task copyKotlinDebugUnitTestClasses(type: Copy) {
-    from "build/tmp/kotlin-classes/debugUnitTest"
-    into "build/intermediates/classes/test/debug"
-}
-
-task copyKotlinDebugClasses(type: Copy) {
-    from "build/tmp/kotlin-classes/debug"
-    into "build/intermediates/classes/debug"
-}
+//task copyKotlinDebugUnitTestClasses(type: Copy) {
+//    from "build/tmp/kotlin-classes/debugUnitTest"
+//    into "build/intermediates/classes/test/debug"
+//}
+//
+//task copyKotlinDebugClasses(type: Copy) {
+//    from "build/tmp/kotlin-classes/debug"
+//    into "build/intermediates/classes/debug"
+//}
