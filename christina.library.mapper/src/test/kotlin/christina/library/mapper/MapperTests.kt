@@ -23,7 +23,7 @@ import kotlin.test.assertTrue
 
 @Suppress("JoinDeclarationAndAssignment")
 abstract class MapperTests(
-    private val mapperFactory: () -> Mapper
+    private val factory: (MappingHost) -> Mapper
 ) {
     companion object {
         open class Source {
@@ -153,13 +153,13 @@ abstract class MapperTests(
         }
     }
 
-    fun generateMapper() = mapperFactory()
+    fun generateMapper() = factory(mappingHost)
 
-    lateinit var mapper: Mapper
+    lateinit var target: Mapper
 
     @Before
     fun setup() {
-        mapper = generateMapper()
+        target = generateMapper()
     }
 
     @Test
@@ -169,7 +169,7 @@ abstract class MapperTests(
         //endregion
 
         //region Act
-        mapping = mapper.getMapping(mappingDescriptor)
+        mapping = target.getMapping(mappingDescriptor)
         //endregion
 
         //region Assert
@@ -185,7 +185,7 @@ abstract class MapperTests(
 
         //region Act
         exception = try {
-            mapper.getMapping(MappingDescriptor(Destination::class, Source::class))
+            target.getMapping(MappingDescriptor(Destination::class, Source::class))
             null
         } catch (e: MapperException) {
             e.cause as ReasonableException
@@ -205,7 +205,7 @@ abstract class MapperTests(
         //endregion
 
         //region Act
-        destination = mapper.map(mappingDescriptor, source)
+        destination = target.map(mappingDescriptor, source)
         //endregion
 
         //region Assert
@@ -221,7 +221,7 @@ abstract class MapperTests(
         //endregion
 
         //region Act
-        mapper.map(mappingDescriptor, source, destination)
+        target.map(mappingDescriptor, source, destination)
         //endregion
 
         //region Assert
@@ -237,7 +237,7 @@ abstract class MapperTests(
         //endregion
 
         //region Act
-        destination = mapper.mapNullable(mappingDescriptor, source)
+        destination = target.mapNullable(mappingDescriptor, source)
         //endregion
 
         //region Assert
@@ -254,7 +254,7 @@ abstract class MapperTests(
         //endregion
 
         //region Act
-        mapper.mapNullable(mappingDescriptor, source, destination)
+        target.mapNullable(mappingDescriptor, source, destination)
         //endregion
 
         //region Assert
@@ -269,7 +269,7 @@ abstract class MapperTests(
         //endregion
 
         //region Act
-        destination = mapper.mapNullable(mappingDescriptor, null)
+        destination = target.mapNullable(mappingDescriptor, null)
         //endregion
 
         //region Assert
@@ -284,7 +284,7 @@ abstract class MapperTests(
         //endregion
 
         //region Act
-        mapper.mapNullable(mappingDescriptor, null, destination)
+        target.mapNullable(mappingDescriptor, null, destination)
         //endregion
 
         //region Assert
@@ -300,7 +300,7 @@ abstract class MapperTests(
         //endregion
 
         //region Act
-        destination = mapper.runtimeMap(Destination::class, source as Any)
+        destination = target.runtimeMap(Destination::class, source as Any)
         //endregion
 
         //region Assert
@@ -316,7 +316,7 @@ abstract class MapperTests(
         //endregion
 
         //region Act
-        mapper.runtimeMap(Destination::class, source as Any, destination)
+        target.runtimeMap(Destination::class, source as Any, destination)
         //endregion
 
         //region Assert
@@ -332,7 +332,7 @@ abstract class MapperTests(
         //endregion
 
         //region Act
-        destination = mapper.runtimeMapNullable(Destination::class, source as Any?)
+        destination = target.runtimeMapNullable(Destination::class, source as Any?)
         //endregion
 
         //region Assert
@@ -349,7 +349,7 @@ abstract class MapperTests(
         //endregion
 
         //region Act
-        mapper.runtimeMapNullable(Destination::class, source as Any?, destination)
+        target.runtimeMapNullable(Destination::class, source as Any?, destination)
         //endregion
 
         //region Assert
@@ -364,7 +364,7 @@ abstract class MapperTests(
         //endregion
 
         //region Act
-        destination = mapper.runtimeMapNullable(Destination::class, null)
+        destination = target.runtimeMapNullable(Destination::class, null)
         //endregion
 
         //region Assert
@@ -379,7 +379,7 @@ abstract class MapperTests(
         //endregion
 
         //region Act
-        mapper.runtimeMapNullable(Destination::class, null, destination)
+        target.runtimeMapNullable(Destination::class, null, destination)
         //endregion
 
         //region Assert
@@ -395,7 +395,7 @@ abstract class MapperTests(
         //endregion
 
         //region Act
-        destinationCollection = mapper.mapMany(mappingDescriptor, sourceCollection)
+        destinationCollection = target.mapMany(mappingDescriptor, sourceCollection)
         //endregion
 
         //region Assert
@@ -411,7 +411,7 @@ abstract class MapperTests(
         //endregion
 
         //region Act
-        mapper.mapMany(mappingDescriptor, sourceCollection, destinationCollection)
+        target.mapMany(mappingDescriptor, sourceCollection, destinationCollection)
         //endregion
 
         //region Assert
@@ -427,7 +427,7 @@ abstract class MapperTests(
         //endregion
 
         //region Act
-        destinationCollection = mapper.mapManyNullable(mappingDescriptor, sourceCollection)
+        destinationCollection = target.mapManyNullable(mappingDescriptor, sourceCollection)
         //endregion
 
         //region Assert
@@ -446,7 +446,7 @@ abstract class MapperTests(
         //endregion
 
         //region Act
-        mapper.mapManyNullable(mappingDescriptor, sourceCollection, destinationCollection)
+        target.mapManyNullable(mappingDescriptor, sourceCollection, destinationCollection)
         //endregion
 
         //region Assert
@@ -465,7 +465,7 @@ abstract class MapperTests(
         //endregion
 
         //region Act
-        destinationCollection = mapper.mapManyNullable(mappingDescriptor, sourceCollection)
+        destinationCollection = target.mapManyNullable(mappingDescriptor, sourceCollection)
         //endregion
 
         //region Assert
@@ -484,7 +484,7 @@ abstract class MapperTests(
         //endregion
 
         //region Act
-        mapper.mapManyNullable(mappingDescriptor, sourceCollection, destinationCollection)
+        target.mapManyNullable(mappingDescriptor, sourceCollection, destinationCollection)
         //endregion
 
         //region Assert
@@ -502,7 +502,7 @@ abstract class MapperTests(
         //endregion
 
         //region Act
-        destinationCollection = mapper.runtimeMapMany(Destination::class, sourceCollection as Iterable<Any>)
+        destinationCollection = target.runtimeMapMany(Destination::class, sourceCollection as Iterable<Any>)
         //endregion
 
         //region Assert
@@ -519,7 +519,7 @@ abstract class MapperTests(
         //endregion
 
         //region Act
-        mapper.runtimeMapMany(Destination::class, sourceCollection as Iterable<Any>, destinationCollection)
+        target.runtimeMapMany(Destination::class, sourceCollection as Iterable<Any>, destinationCollection)
         //endregion
 
         //region Assert
@@ -535,7 +535,7 @@ abstract class MapperTests(
         //endregion
 
         //region Act
-        destinationCollection = mapper.runtimeMapManyNullable(Destination::class, sourceCollection as Iterable<Any?>)
+        destinationCollection = target.runtimeMapManyNullable(Destination::class, sourceCollection as Iterable<Any?>)
         //endregion
 
         //region Assert
@@ -554,7 +554,7 @@ abstract class MapperTests(
         //endregion
 
         //region Act
-        mapper.runtimeMapManyNullable(Destination::class, sourceCollection as Iterable<Any?>, destinationCollection)
+        target.runtimeMapManyNullable(Destination::class, sourceCollection as Iterable<Any?>, destinationCollection)
         //endregion
 
         //region Assert
@@ -572,7 +572,7 @@ abstract class MapperTests(
         //endregion
 
         //region Act
-        destinationCollection = mapper.runtimeMapManyNullable(Destination::class, sourceCollection)
+        destinationCollection = target.runtimeMapManyNullable(Destination::class, sourceCollection)
         //endregion
 
         //region Assert
@@ -591,7 +591,7 @@ abstract class MapperTests(
         //endregion
 
         //region Act
-        mapper.runtimeMapManyNullable(Destination::class, sourceCollection, destinationCollection)
+        target.runtimeMapManyNullable(Destination::class, sourceCollection, destinationCollection)
         //endregion
 
         //region Assert
