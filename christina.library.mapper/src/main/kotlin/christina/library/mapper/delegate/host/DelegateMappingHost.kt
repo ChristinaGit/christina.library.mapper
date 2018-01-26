@@ -11,9 +11,9 @@ import christina.library.mapper.delegate.mapping.DelegateMapping
 class DelegateMappingHost : MappingHost {
     private val mappings: MutableMap<MappingDescriptor<Any, Any>, Mapping<Any, Any>> = mutableMapOf()
 
-    fun <TSource : Any, TDestination : Any> addMapping(
-        descriptor: MappingDescriptor<TSource, TDestination>,
-        mapper: DelegateMapping<TSource, TDestination>
+    fun <Source : Any, Destination : Any> addMapping(
+        descriptor: MappingDescriptor<Source, Destination>,
+        mapper: DelegateMapping<Source, Destination>
     ) {
         @Suppress("UNCHECKED_CAST")
         val rawDescriptor = descriptor as MappingDescriptor<Any, Any>
@@ -25,10 +25,10 @@ class DelegateMappingHost : MappingHost {
         mappings[rawDescriptor] = mapper as Mapping<Any, Any>
     }
 
-    override fun <TSource : Any, TDestination : Any> findMapping(
-        descriptor: MappingDescriptor<TSource, TDestination>
-    ): Mapping<TSource, TDestination>? {
+    override fun <Source : Any, Destination : Any> findMapping(
+        descriptor: MappingDescriptor<Source, Destination>
+    ): Mapping<Source, Destination>? {
         @Suppress("UNCHECKED_CAST")
-        return mappings[descriptor as MappingDescriptor<Any, Any>] as Mapping<TSource, TDestination>?
+        return mappings[descriptor as MappingDescriptor<Any, Any>] as Mapping<Source, Destination>?
     }
 }
